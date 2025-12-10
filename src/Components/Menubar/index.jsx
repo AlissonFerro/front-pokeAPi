@@ -3,9 +3,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Menu, NavLink } from './styles';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export default function Manubar() {
+export default React.memo(function Manubar() {
     const [open, setOpen] = useState(false);
     function toogleOpen(e){
         setOpen(!open);
@@ -34,4 +34,4 @@ export default function Manubar() {
             </Menu>
         </>
     );
-}
+});

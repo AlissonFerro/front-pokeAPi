@@ -1,10 +1,13 @@
 import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Image } from "../styles";
+import { Image, Title } from "../styles";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { addFavorits, getFavorits, removeToFavorits } from "../../Abstract/favorits";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PokeCard({ name, png }) {
+    const navigate = useNavigate();
+
     if (!name || !png) return
 
     const renderTooltipFav = (props) => (
@@ -52,13 +55,16 @@ export default function PokeCard({ name, png }) {
         }
     }
 
+    async function handleNavigate(name) {
+        navigate(`/${name}`);
+    }
 
 
     return (
         <Card>
-            <Card.Title>{name}</Card.Title>
+            <Title onClick={() => handleNavigate(name)}>{name}</Title>
             <Card.Body>
-                <Image src={png} />
+                <Image src={png} onClick={() => handleNavigate(name)} />
             </Card.Body>
             <Card.Footer>
                 <RenderTooltips name={name} />
