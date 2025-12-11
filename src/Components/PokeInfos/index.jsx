@@ -1,71 +1,67 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { CardTitlePokeInfo } from "../styles";
 import { useEffect, useState } from "react";
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+// Adicionei ResponsiveContainer para melhor responsividade do gráfico
 
 export default function PokeInfos({ poke }) {
 
     const SimpleRadarChart = ({ stats }) => {
-        if(!stats) return
-        const s = [];
-        for (let i = 0; i < stats.length; i++) {
-            const test = {
-                A: stats[i].base_stat, 
-                subject: stats[i].stat.name,
-            } 
-            s.push(test);
-        }
+        if (!stats) return null; 
+
+        const data = stats.map(stat => ({
+            A: stat.base_stat, 
+            subject: stat.stat.name,
+        }));
         
         return (
-            <RadarChart
-                style={{ width: '100%', height: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }}
-                responsive
-                outerRadius="80%"
-                data={s}
-                margin={{
-                    top: 20,
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                }}
-            >
-                <PolarGrid />
-                <PolarAngleAxis dataKey="subject" />
-                <PolarRadiusAxis />
-                <Radar name={poke.name} dataKey="A" stroke="#a600ff" fill="#8884d8" fillOpacity={0.6} />
-            </RadarChart>
+            <ResponsiveContainer width="100%" aspect={1}>
+                <RadarChart
+                    outerRadius="80%"
+                    data={data}
+                    margin={{
+                        top: 20,
+                        left: 20,
+                        right: 20,
+                        bottom: 20,
+                    }}
+                >
+                    <PolarGrid />
+                    <PolarAngleAxis dataKey="subject" />
+                    <PolarRadiusAxis />
+                    <Radar name={poke.name} dataKey="A" stroke="#a600ff" fill="#8884d8" fillOpacity={0.6} />
+                </RadarChart>
+            </ResponsiveContainer>
         );
     };
 
     function RenderAbilities() {
-        if (!poke) return <></>
+        if (!poke) return null;
 
-        return poke.abilities?.map((ability) => <p key={ability}>{ability.ability.name}</p>)
+        return poke.abilities?.map((item) => (
+            <p key={item.ability.name}>{item.ability.name}</p>
+        ));
     }
 
     function RenderImages({ images }) {
-        const [src, setSrc] = useState(images.front_default);
-        const [position, setPosition] = useState(0);
+        const [index, setIndex] = useState(0); 
         const pathImages = ['front_default', 'back_default', 'back_shiny', 'front_shiny'];
 
         useEffect(() => {
             const interval = setInterval(() => {
-                console.log(src)
-                if(!src) return
-                setPosition(pos => pos + 1);
-                if (position > pathImages.length - 2)
-                    setPosition(0);
-
-                setSrc(images[pathImages[position]]);
+                setIndex(prevIndex => (prevIndex + 1) % pathImages.length);
             }, 2500);
 
-
             return () => {
-                clearInterval(interval)
+                clearInterval(interval);
             }
-        }, [position])
+        }, [pathImages.length]);
 
-        return <img src={src} alt="Pokemon" />
+        const currentSrc = images?.[pathImages[index]];
+
+        if (!currentSrc) return <p>Imagem não disponível</p>
+
+        return <img src={currentSrc} alt="Pokemon" style={{ width: '100px', height: '100px' }} />;
     }
 
     return (
@@ -84,6 +80,7 @@ export default function PokeInfos({ poke }) {
                     </Col>
                 </Row>
                 <Row>
+                    {/* Garantindo que stats sejam passados corretamente */}
                     <SimpleRadarChart stats={poke.stats} />
                 </Row>
             </Card.Body>
