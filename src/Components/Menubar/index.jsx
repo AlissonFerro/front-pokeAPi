@@ -6,27 +6,33 @@ import { Menu, NavLink } from './styles';
 import React, { useState } from 'react';
 
 export default React.memo(function Manubar() {
-    const [open, setOpen] = useState(false);
-    function toogleOpen(e){
-        setOpen(!open);
-    }
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    
+    const handleShow = () => setShow(true);
+
     return (
         <>
-            <Menu expand={open} expanded={open} className="bg-body-tertiary mb-3">
+            <Menu expand="lg" className="bg-body-tertiary mb-3"> 
                 <Container fluid>
                     <NavLink to={'/'}>Home</NavLink>
-                    <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-false`} onClick={toogleOpen} />
+                    
+                    <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" onClick={handleShow} />
+                    
                     <Navbar.Offcanvas
-                        id={`offcanvasNavbar-expand-false`}
-                        aria-labelledby={`offcanvasNavbarLabel-expand-false`}
+                        id="offcanvasNavbar-expand-lg"
+                        aria-labelledby="offcanvasNavbarLabel-expand-lg"
                         placement="end"
+                        show={show}          
+                        onHide={handleClose} 
                     >
-                        <Offcanvas.Header onClick={toogleOpen} closeButton>
+                        <Offcanvas.Header closeButton>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                            <Nav className="justify-content-end flex-grow-1 pe-3" onSelect={(e) => toogleOpen(e)}>
-                                <NavLink to={'/'} onClick={toogleOpen}>Home</NavLink>
-                                <NavLink to={'/favoritos'} onClick={toogleOpen}>Favoritos</NavLink>
+                            <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <NavLink to={'/'} onClick={handleClose}>Home</NavLink>
+                                <NavLink to={'/favoritos'} onClick={handleClose}>Favoritos</NavLink>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
