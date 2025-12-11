@@ -2,7 +2,6 @@ import { Card, Col, Row } from "react-bootstrap";
 import { CardTitlePokeInfo } from "../styles";
 import { useEffect, useState } from "react";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
-// Adicionei ResponsiveContainer para melhor responsividade do gráfico
 
 export default function PokeInfos({ poke }) {
 
@@ -15,23 +14,26 @@ export default function PokeInfos({ poke }) {
         }));
         
         return (
-            <ResponsiveContainer width="100%" aspect={1}>
+            <Row className="justify-content-center">
+            <ResponsiveContainer width="80%" aspect={1}>
                 <RadarChart
                     outerRadius="80%"
                     data={data}
                     margin={{
-                        top: 20,
-                        left: 20,
-                        right: 20,
-                        bottom: 20,
+                        top: 50,
+                        left: 50,
+                        right: 50,
+                        bottom: 50,
                     }}
                 >
                     <PolarGrid />
                     <PolarAngleAxis dataKey="subject" />
                     <PolarRadiusAxis />
-                    <Radar name={poke.name} dataKey="A" stroke="#a600ff" fill="#8884d8" fillOpacity={0.6} />
+                    <Radar name={poke.name} dataKey="A" stroke="#a600ff" fill="#8884d8" fillOpacity={0.45} />
                 </RadarChart>
             </ResponsiveContainer>
+            </Row>
+
         );
     };
 
@@ -68,7 +70,7 @@ export default function PokeInfos({ poke }) {
         <Card>
             <CardTitlePokeInfo>{poke.name} <span>xp: {poke.base_experience}</span></CardTitlePokeInfo>
             <Card.Body>
-                <Row sm={3} >
+                <Row>
                     <Col>
                         <RenderAbilities />
                     </Col>
@@ -76,11 +78,10 @@ export default function PokeInfos({ poke }) {
                         <RenderImages images={poke.sprites} />
                     </Col>
                     <Col>
-                        Teste
+                        <span>Peso:{poke.weight}</span>
                     </Col>
                 </Row>
                 <Row>
-                    {/* Garantindo que stats sejam passados corretamente */}
                     <SimpleRadarChart stats={poke.stats} />
                 </Row>
             </Card.Body>
