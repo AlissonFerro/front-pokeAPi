@@ -10,7 +10,7 @@ export default function FavoritsPage() {
     const [pokenames, setPokesnames] = useState([]);
     const [listPokes, setListPokes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { getPokesByNames } = usePokes(pokenames, setLoading, setListPokes);
+    const { getPokesByNames } = usePokes({pokenames, setLoading, setListPokes});
     
     useEffect(() => {
         const favorits = getFavorits();

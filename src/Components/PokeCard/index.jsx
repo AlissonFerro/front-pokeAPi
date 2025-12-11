@@ -56,7 +56,7 @@ export default function PokeCard({ name, png }) {
     }
 
     async function handleNavigate(name) {
-        navigate(`/${name}`);
+        navigate(`/search/${name}`);
     }
 
 

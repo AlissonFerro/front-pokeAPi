@@ -6,7 +6,7 @@ export default function usePokes({ pokenames, setLoading, setListPokes }) {
     const getPokesByNames = useCallback(async () => {
         const pokeInfo = [];
 
-        for (let i = 0; i < pokenames.length; i++) {
+        for (let i = 0; i < pokenames?.length; i++) {
             const res = await getPokeInfos(pokenames[i]);
             pokeInfo.push(res.data);
         }
