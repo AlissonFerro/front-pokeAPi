@@ -1,4 +1,4 @@
-import { Card, Carousel, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { CardTitlePokeInfo } from "../styles";
 import { useEffect, useState } from "react";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
@@ -6,9 +6,9 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'r
 export default function PokeInfos({ poke }) {
 
     const SimpleRadarChart = ({ stats }) => {
+        if(!stats) return
         const s = [];
         for (let i = 0; i < stats.length; i++) {
-            console.log(stats[i])
             const test = {
                 A: stats[i].base_stat, 
                 subject: stats[i].stat.name,
@@ -45,13 +45,13 @@ export default function PokeInfos({ poke }) {
 
     function RenderImages({ images }) {
         const [src, setSrc] = useState(images.front_default);
-
+        const [position, setPosition] = useState(0);
         const pathImages = ['front_default', 'back_default', 'back_shiny', 'front_shiny'];
-        const [position, setPosition] = useState(1);
 
         useEffect(() => {
             const interval = setInterval(() => {
-
+                console.log(src)
+                if(!src) return
                 setPosition(pos => pos + 1);
                 if (position > pathImages.length - 2)
                     setPosition(0);

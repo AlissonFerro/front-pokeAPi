@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useCallback } from "react";
 
-export default function usePokes(pokenames, setLoading, setListPokes) {
+export default function usePokes({ pokenames, setLoading, setListPokes }) {
 
     const getPokesByNames = useCallback(async () => {
         const pokeInfo = [];
@@ -17,7 +17,9 @@ export default function usePokes(pokenames, setLoading, setListPokes) {
     async function getPokeInfos(name) {
         setLoading(true);
         try {
-            return await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            console.log(res);
+            return res
         } catch (error) {
             console.error(error);
         }
