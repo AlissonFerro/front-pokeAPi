@@ -1,43 +1,104 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Menu, NavLink } from './styles';
-import React, { useState } from 'react';
+import {
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Toolbar
+} from "@mui/material";
+import {
+    MenuOpenOutlined,
+    MenuOutlined,
+    LightMode,
+    DarkMode
+} from "@mui/icons-material";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { DrawerStyles } from "../styles";
+import { ThemeContext } from "../../Context/Theme";
 
-export default React.memo(function Manubar() {
+export default function Menubar() {
     const [show, setShow] = useState(false);
+    const [drawerWidth, setDrawerWidth] = useState(50);
+    const navigate = useNavigate();
+    const { mode, toggleColorMode } = useContext(ThemeContext)
+    const handleClose = () => {
+        setShow(false);
+        setDrawerWidth(50)
+    };
 
-    const handleClose = () => setShow(false);
-    
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+        setDrawerWidth(240);
+    }
+
+    function RenderMenuIcon({ show }) {
+        if (show)
+            return <ListItem disablePadding>
+                <ListItemButton onClick={handleClose} >
+                    <ListItemIcon>
+                        <MenuOpenOutlined />
+                    </ListItemIcon>
+                </ListItemButton>
+            </ListItem>
+
+        return <ListItem disablePadding>
+            <ListItemButton onClick={handleShow} >
+                <ListItemIcon>
+                    <MenuOutlined />
+                </ListItemIcon>
+            </ListItemButton>
+        </ListItem>
+    }
+
+    function RenderMode({ mode }) {
+        return (
+            <ListItemButton onClick={toggleColorMode}>
+                <ListItemIcon>
+                    {mode == 'light' ? <LightMode /> : <DarkMode />}
+                </ListItemIcon>
+                <ListItemText primary={mode == 'light' ? 'Dark' : 'Light'} />
+            </ListItemButton>
+        )
+    }
 
     return (
         <>
-            <Menu expand="lg" className="bg-body-tertiary mb-3"> 
-                <Container fluid>
-                    <NavLink to={'/'}>Home</NavLink>
-                    
-                    <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" onClick={handleShow} />
-                    
-                    <Navbar.Offcanvas
-                        id="offcanvasNavbar-expand-lg"
-                        aria-labelledby="offcanvasNavbarLabel-expand-lg"
-                        placement="end"
-                        show={show}          
-                        onHide={handleClose} 
-                    >
-                        <Offcanvas.Header closeButton>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-                            <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <NavLink to={'/'} onClick={handleClose}>Home</NavLink>
-                                <NavLink to={'/favoritos'} onClick={handleClose}>Favoritos</NavLink>
-                            </Nav>
-                        </Offcanvas.Body>
-                    </Navbar.Offcanvas>
-                </Container>
-            </Menu>
+            <DrawerStyles
+                variant="permanent"
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    "& .MuiDrawer-paper": {
+                        width: drawerWidth,
+                        boxSizing: "border-box"
+                    }
+                }}
+            >
+                <Toolbar />
+                <List>
+                    <RenderMode mode={mode} />
+                    <RenderMenuIcon show={show} />
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <CatchingPokemonIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Pokédex" onClick={() => { navigate('/'); handleClose() }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <FavoriteIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Favoritos" onClick={() => { navigate('/favoritos'); handleClose() }} />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+            </DrawerStyles >
         </>
     );
-});
+}

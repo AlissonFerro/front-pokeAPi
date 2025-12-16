@@ -1,5 +1,5 @@
-import { Col } from "react-bootstrap";
 import PokeCard from "../PokeCard";
+import { Col } from "../styles";
 
 export default function RenderList({ list }) {
     return list.map((p) => (

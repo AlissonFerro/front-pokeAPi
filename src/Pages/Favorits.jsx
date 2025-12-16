@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
 import { PageCenter,  ContainerGap } from "./styles";
 import RenderList from "../Components/RenderList";
 import { getFavorits } from "../Abstract/favorits";
 import RenderLoading from "../Components/RenderLoading";
 import usePokes from "../CustomHooks/usePokes";
+import { Row } from "../Components/styles";
 
 export default function FavoritsPage() {
     const [pokenames, setPokesnames] = useState([]);
@@ -24,7 +24,7 @@ export default function FavoritsPage() {
     return (
         <PageCenter>
             <ContainerGap fluid >
-                <Row className="justify-content-md-center">
+                <Row>
                     <h3>Seus favoritos</h3>
                     <RenderLoading loading={loading}>
                         <RenderList list={listPokes} />

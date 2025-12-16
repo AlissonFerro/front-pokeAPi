@@ -1,17 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import Index from "./Pages/Index";
 import FavoritsPage from "./Pages/Favorits";
-import Menubar from "./Components/Menubar";
 import PokePage from "./Pages/Poke";
+import MenuLayout from "./Layout/Menu";
 
 function App() {
   return (
     <>
-      <Menubar />
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/favoritos" element={<FavoritsPage />} />
-        <Route path="/search/:name" element={<PokePage />} />
+        <Route path="/" element={<MenuLayout />}>
+          <Route path="/" element={<Index />} />
+          <Route path="/favoritos" element={<FavoritsPage />} />
+          <Route path="/search/:name" element={<PokePage />} />
+        </Route>
       </Routes>
     </>
   );

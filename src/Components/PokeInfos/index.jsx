@@ -1,14 +1,13 @@
-import { Card, Col, Row } from "react-bootstrap";
-import { CardTitlePokeInfo } from "../styles";
+import { CardBody, CardT, CardTitlePokeInfo, Col, Row } from "../styles";
 import SimpleRadarChart from "../SimpleRadarChart";
 import RenderImages from "../RenderImages";
 import RenderAbilities from "../RenderAbilities";
 
 export default function PokeInfos({ poke }) {
     return (
-        <Card>
+        <CardT>
             <CardTitlePokeInfo>{poke.name} <span>xp: {poke.base_experience}</span></CardTitlePokeInfo>
-            <Card.Body>
+            <CardBody>
                 <Row>
                     <Col>
                         <RenderAbilities abilities={poke.abilities}/>
@@ -23,7 +22,7 @@ export default function PokeInfos({ poke }) {
                 <Row>
                     <SimpleRadarChart poke={poke} />
                 </Row>
-            </Card.Body>
-        </Card>
+            </CardBody>
+        </CardT>
     )
 }

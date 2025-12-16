@@ -1,5 +1,5 @@
-import { Row } from "react-bootstrap";
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from "recharts";
+import { Row } from "../styles";
 
 export default function SimpleRadarChart({ poke }){
     if (!poke.stats) return null;

@@ -2,7 +2,8 @@ import { Activity, useCallback, useEffect, useState } from "react";
 import usePokes from "../CustomHooks/usePokes"
 import { useParams } from "react-router-dom";
 import PokeInfos from "../Components/PokeInfos";
-import { Col, Container, Row } from "react-bootstrap";
+import Container from "@mui/material/Container";
+import { Col, Row } from "../Components/styles";
 
 export default function PokePage() {
   const [poke, setPoke] = useState({});
