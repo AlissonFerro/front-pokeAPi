@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
@@ -9,10 +7,10 @@ export const ContainerCenter = styled(Grid)(({theme})=> ({
   flexDirection: 'column !important'
 }));
 
-export const PageCenter = styled('div')(({theme}) => {
-
-})
-
+export const PageCenter = styled('section')(({theme}) => ({
+  display: 'flex',
+  flexDirection: 'column'
+}))
 
 export const Row = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.paper, 
@@ -42,9 +40,10 @@ export const Col = styled('div')(({ theme }) => ({
   },
 }));
 
-export const ContainerGap = styled(Container)(({theme}) => {
-
-})
+export const ContainerGap = styled(Container)(({theme}) =>( {
+  display: 'flex',
+  flexDirection: 'column'
+}))
 
 export const RowHeader = styled('div')(({theme}) => {
 

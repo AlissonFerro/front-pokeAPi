@@ -1,5 +1,5 @@
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from "recharts";
-import { Row } from "../styles";
+import { RadarStyles } from "../styles";
 
 export default function SimpleRadarChart({ poke }){
     if (!poke.stats) return null;
@@ -10,8 +10,8 @@ export default function SimpleRadarChart({ poke }){
     }));
 
     return (
-        <Row className="justify-content-center">
-            <ResponsiveContainer width="80%" aspect={1}>
+        <RadarStyles>
+            <ResponsiveContainer width="100%" aspect={1}>
                 <RadarChart
                     outerRadius="80%"
                     data={data}
@@ -28,7 +28,7 @@ export default function SimpleRadarChart({ poke }){
                     <Radar name={poke.name} dataKey="A" stroke="#a600ff" fill="#8884d8" fillOpacity={0.45} />
                 </RadarChart>
             </ResponsiveContainer>
-        </Row>
+        </RadarStyles>
 
     );
 };

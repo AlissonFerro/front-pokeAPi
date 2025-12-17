@@ -2,8 +2,8 @@ import { Activity, useCallback, useEffect, useState } from "react";
 import usePokes from "../CustomHooks/usePokes"
 import { useParams } from "react-router-dom";
 import PokeInfos from "../Components/PokeInfos";
-import Container from "@mui/material/Container";
-import { Col, Row } from "../Components/styles";
+import { ContainerCenter } from './styles';
+import { Container } from "@mui/material";
 
 export default function PokePage() {
   const [poke, setPoke] = useState({});
@@ -30,13 +30,9 @@ export default function PokePage() {
 
   return (
     <Container>
-      <Row className="justify-content-center"> 
-        <Col xs={10} md={8}>
-          <Activity mode={isLoading ? 'hidden' : 'visible'}>
-            <PokeInfos poke={poke} />
-          </Activity>
-        </Col>
-      </Row>
+      <Activity mode={isLoading ? 'hidden' : 'visible'}>
+        <PokeInfos poke={poke} />
+      </Activity>
     </Container>
   );
 }

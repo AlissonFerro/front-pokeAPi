@@ -21,9 +21,8 @@ export const NavLink = styled(Link)(({ theme }) => ({
 export const CardT = styled(Grid)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem', 
-    minWidth: '200px'
-    
+    minWidth: '200px',  
+    alignItems: 'center'  
 }))
 
 export const CardBody = styled('div')(({ theme }) => ({
@@ -53,6 +52,10 @@ export const Row = styled('div')(({ theme }) => ({
     flexDirection: "row"
 }));
 
+export const RowCenter = styled(Row)(({ theme }) => ({
+    justifyContent: 'center'
+}))
+
 export const Col = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.text.primary,
@@ -70,7 +73,8 @@ export const Col = styled('div')(({ theme }) => ({
 }));
 
 export const CardTitlePokeInfo = styled('h2')(({ theme }) => ({
-
+    textTransform: 'uppercase',
+    margin: '1.5rem'    
 }))
 
 
@@ -94,4 +98,14 @@ export const Title = styled('h1')(({ theme }) => ({
 
 export const PokeImage = styled('img')(({ theme }) => ({
     cursor: 'pointer'
+}))
+
+export const RadarStyles = styled('div')(({ theme }) => ({
+    width: '100%',
+    margin: 'auto'
+}));
+
+export const PokeCard = styled(Card)(({ theme }) => ({
+    width: '50%',
+    margin: '3rem auto'
 }))
