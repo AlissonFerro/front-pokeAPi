@@ -1,8 +1,12 @@
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import styled from "styled-components";
 
 export const Root = styled(Container)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+}))
+
+export const Section = styled(Grid)(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center'
 }))

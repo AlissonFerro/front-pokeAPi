@@ -1,15 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Menubar from "../Components/Menubar";
-import { Root } from "./styles";
+import { Root, Section } from "./styles";
 import { Grid } from "@mui/material";
 
 export default function MenuLayout() {
     return (
         <Root>
-            <Grid >
+            <Grid>
                 <Menubar />
             </Grid>
-            <Outlet />
+            <Section >
+                <Outlet />
+            </Section>
         </Root>
     )
 }

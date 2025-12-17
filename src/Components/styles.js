@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { Drawer } from "@mui/material";
 
 export const DrawerStyles = styled(Drawer)(({ themes }) => ({
-
+    marginRight: '1rem'
 }))
 
 export const Menu = styled('div')(({ theme }) => ({
@@ -83,7 +83,7 @@ export const RowHeader = styled('div')(({ theme }) => ({
 }))
 
 
-export const Void = styled('div')(({ theme }) => ({
+export const Void = styled('span')(({ theme }) => ({
 
 }))
 

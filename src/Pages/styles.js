@@ -4,7 +4,9 @@ import Grid from "@mui/material/Grid";
 
 export const ContainerCenter = styled(Grid)(({theme})=> ({
   display: 'flex',
-  flexDirection: 'column !important'
+  flexDirection: 'column !important',
+  padding: 0,
+  textAlign: 'center'
 }));
 
 export const PageCenter = styled('section')(({theme}) => ({
@@ -42,7 +44,7 @@ export const Col = styled('div')(({ theme }) => ({
 
 export const ContainerGap = styled(Container)(({theme}) =>( {
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
 }))
 
 export const RowHeader = styled('div')(({theme}) => {

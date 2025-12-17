@@ -16,7 +16,7 @@ import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DrawerStyles } from "../styles";
+import { DrawerStyles, Void } from "../styles";
 import { ThemeContext } from "../../Context/Theme";
 
 export default function Menubar() {
@@ -31,7 +31,7 @@ export default function Menubar() {
 
     const handleShow = () => {
         setShow(true);
-        setDrawerWidth(240);
+        setDrawerWidth(320);
     }
 
     function RenderMenuIcon({ show }) {
@@ -57,7 +57,7 @@ export default function Menubar() {
         return (
             <ListItemButton onClick={toggleColorMode}>
                 <ListItemIcon>
-                    {mode == 'light' ? <LightMode /> : <DarkMode />}
+                    {mode == 'light' ? <DarkMode /> : <LightMode />}
                 </ListItemIcon>
                 <ListItemText primary={mode == 'light' ? 'Dark' : 'Light'} />
             </ListItemButton>
@@ -71,30 +71,37 @@ export default function Menubar() {
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
+                    zIndex: 1000,
                     "& .MuiDrawer-paper": {
                         width: drawerWidth,
                         boxSizing: "border-box"
                     }
                 }}
             >
-                <Toolbar />
-                <List>
+                <List style={{ overflow: 'hidden' }}>
                     <RenderMode mode={mode} />
-                    <RenderMenuIcon show={show} />
                     <ListItem disablePadding>
                         <ListItemButton>
+                            <ListItemIcon>
+                                <Toolbar />
+                            </ListItemIcon>
+                        </ListItemButton>
+                    </ListItem>
+                    <RenderMenuIcon show={show} />
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => { navigate('/'); handleClose() }} >
                             <ListItemIcon>
                                 <CatchingPokemonIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Pokédex" onClick={() => { navigate('/'); handleClose() }} />
+                            <ListItemText primary="Pokédex" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => { navigate('/favoritos'); handleClose() }}>
                             <ListItemIcon>
                                 <FavoriteIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Favoritos" onClick={() => { navigate('/favoritos'); handleClose() }} />
+                            <ListItemText primary="Favoritos" />
                         </ListItemButton>
                     </ListItem>
                 </List>
