@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 
 export default function MenuLayout() {
     return (
-        <Root>
+        <Root sx={{ display: 'flex', justifyContent: 'center' }}>
             <Grid>
                 <Menubar />
             </Grid>

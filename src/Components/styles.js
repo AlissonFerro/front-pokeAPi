@@ -53,7 +53,8 @@ export const Row = styled('div')(({ theme }) => ({
 }));
 
 export const RowCenter = styled(Row)(({ theme }) => ({
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexWrap: 'wrap'
 }))
 
 export const Col = styled('div')(({ theme }) => ({
@@ -106,6 +107,5 @@ export const RadarStyles = styled('div')(({ theme }) => ({
 }));
 
 export const PokeCard = styled(Card)(({ theme }) => ({
-    width: '50%',
     margin: '3rem auto'
 }))
