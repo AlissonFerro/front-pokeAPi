@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import { Drawer } from "@mui/material";
+import { Drawer, Paper } from "@mui/material";
 
 export const DrawerStyles = styled(Drawer)(({ themes }) => ({
     marginRight: '1rem'
@@ -29,6 +29,13 @@ export const CardBody = styled('div')(({ theme }) => ({
     
 }))
 
+export const CardHeader = styled(Paper)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    alignItems: 'center'
+}));
 
 export const CardFooter = styled(Card)(({ theme }) => ({
     display: 'flex',
@@ -60,14 +67,14 @@ export const RowCenter = styled(Row)(({ theme }) => ({
 export const Col = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.text.primary,
-    padding: theme.spacing(2),
+    padding: 0,
 
     '&:hover': {
         backgroundColor: theme.palette.action.hover,
     },
 
     [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
     },
     display: 'flex',
     flexDirection: "column"
@@ -85,8 +92,8 @@ export const RowHeader = styled('div')(({ theme }) => ({
 
 
 export const Void = styled('span')(({ theme }) => ({
-
-}))
+    width: '50px'
+}));
 
 
 export const Input = styled('input')(({ theme }) => ({
@@ -102,7 +109,7 @@ export const PokeImage = styled('img')(({ theme }) => ({
 }))
 
 export const RadarStyles = styled('div')(({ theme }) => ({
-    width: '100%',
+    width: '65%',
     margin: 'auto'
 }));
 

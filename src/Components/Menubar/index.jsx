@@ -10,7 +10,8 @@ import {
     MenuOpenOutlined,
     MenuOutlined,
     LightMode,
-    DarkMode
+    DarkMode,
+    DifferenceOutlined
 } from "@mui/icons-material";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -102,6 +103,14 @@ export default function Menubar() {
                                 <FavoriteIcon />
                             </ListItemIcon>
                             <ListItemText primary="Favoritos" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => { navigate('/compare'); handleClose() }}>
+                            <ListItemIcon>
+                                <DifferenceOutlined />
+                            </ListItemIcon>
+                            <ListItemText primary="Comparar" />
                         </ListItemButton>
                     </ListItem>
                 </List>

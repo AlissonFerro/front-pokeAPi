@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import RenderList from "../Components/RenderList";
 import RenderLoading from "../Components/RenderLoading";
@@ -6,8 +6,11 @@ import { useGetInfos } from "../CustomHooks/useGet";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { ContainerCenter } from "./styles";
+import { ContainerCenter, Void } from "./styles";
+import { useNavigate } from "react-router-dom";
+import { PokesContext } from "../Context/Pokes";
+import { Input, TextField } from "@mui/material";
+import { toast } from "react-toastify";
 
 export default function Index() {
     const [pokes, setPokes] = useState([]);
@@ -15,15 +18,42 @@ export default function Index() {
     const [currentLink, setCurrentLink] = useState('https://pokeapi.co/api/v2/pokemon/');
     const [previousLink, setPreviousLink] = useState('');
     const [nextLink, setNextLink] = useState('');
-    const { handleGet, handleGetInfosPokes } = useGetInfos(currentLink, setLoading);
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+    const { clearPokes } = useContext(PokesContext);
+    const { handleGet, handleGetInfosPokes, getPokeByName } = useGetInfos(currentLink, setLoading);
 
     const getInfos = useCallback(async () => {
-        const res = await handleGet();
-        setNextLink(res.next);
-        setPreviousLink(res.previous);
-        const res2 = await handleGetInfosPokes(res.results);
-        setPokes(res2)
+        setLoading(true)
+        try {
+            const res = await handleGet();
+            setNextLink(res.next);
+            setPreviousLink(res.previous);
+            const res2 = await handleGetInfosPokes(res.results);
+            setPokes(res2)
+        } catch (error) {
+            toast.error(error.message)
+        } finally {
+            setLoading(false)
+        }
     }, [currentLink]);
+
+    async function getSearch(){
+        setLoading(true)
+        if(search.length < 1){
+            setLoading(false)
+            getInfos();
+            return 
+        } 
+        try {
+            const res = await getPokeByName({ pokename: search });
+            if(res.data.pokes) setPokes(res.data);
+        } catch (error) {
+            toast.error(error);
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
         getInfos();
@@ -32,19 +62,40 @@ export default function Index() {
     return (
         <ContainerCenter>
             <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Grid item sx={{xs:12, md:6, display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+                <Grid item sx={{ xs: 12, md: 6, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                     <Typography variant="h3">Lista de Pokémons</Typography>
+                    <Grid sx={{ display: "flex", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Grid>
+                            <Void />
+                        </Grid>
+                        <Grid sx={{ display: 'flex', alignContent: 'center' }}>
+                            <TextField 
+                                label="Procure um pokemon"
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search}
+                                onBlur={getSearch}
+                            />
+                        </Grid>
+                        <Grid>
+                            <Button onClick={() => navigate('/compare')}>
+                                Comparar
+                            </Button>
+
+                        </Grid>
+                        <Grid sx={{ flexDirection: 'column' }}>
+                            <Button onClick={clearPokes}>
+                                Limpar seleção
+                            </Button>
+                        </Grid>
+                        <Grid><Void /></Grid>
+                    </Grid>
                     <RenderLoading loading={loading}>
-                        {/* xs={12} aqui garante que a lista de RenderList ocupe o espaço total */}
                         <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
                             <RenderList list={pokes} />
                         </Grid>
                     </RenderLoading>
                 </Grid>
-
-                {/* Bloco Botões */}
-                <Grid item sx={{xs:12, justifyContent: 'center'  }}>
-                    {/* Um Grid container interno para alinhar os botões com espaço entre eles */}
+                <Grid item sx={{ xs: 12, justifyContent: 'center' }}>
                     <Grid container >
                         <Grid item >
                             <Button onClick={() => setCurrentLink(previousLink)} disabled={loading || !previousLink}>

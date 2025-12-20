@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export function useGetInfos(url, setLoading){    
     async function handleGet(){
@@ -10,7 +11,24 @@ export function useGetInfos(url, setLoading){
                 next: res.data.next
             };            
         } catch (error) {
-            console.error("Erro ao buscar lista inicial:", error);
+            toast.error(error.message);
+        } finally{
+            setLoading(false);            
+        }
+    }
+
+    async function getPokeByName({ pokename }) {
+        setLoading(true);
+        try {
+            return await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokename}`)
+        } catch (error) {
+            switch (error.status){
+                case 404: 
+                    return toast.error('Nenhum pokemon encontrado');                
+                default: 
+                    return toast.error(error.message);
+            }
+        } finally {
             setLoading(false);
         }
     }
@@ -25,14 +43,13 @@ export function useGetInfos(url, setLoading){
             });
 
             const detailedPokes = await Promise.all(detailedPokesPromises);
-            console.log(detailedPokes);
-            setLoading(false);
             return detailedPokes;
         } catch (error) {
-            console.error("Erro ao buscar detalhes dos pokes:", error);
-            setLoading(false);
+            toast.error(error.message);
+        } finally{
+            setLoading(false);            
         }
     }
 
-    return { handleGet, handleGetInfosPokes };
+    return { handleGet, handleGetInfosPokes, getPokeByName };
 }

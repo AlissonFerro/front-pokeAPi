@@ -51,9 +51,9 @@ export const RowHeader = styled('div')(({theme}) => {
 
 })
 
-export const Void = styled('div')(({theme}) => {
-
-})
+export const Void = styled('div')(({theme}) => ({
+  width: '100px'
+}));
 
 export const Input = styled('input')(({theme}) => {
 

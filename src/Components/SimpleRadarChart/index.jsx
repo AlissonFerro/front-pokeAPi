@@ -2,11 +2,11 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Responsi
 import { RadarStyles } from "../styles";
 
 export default function SimpleRadarChart({ poke }){
-    if (!poke.stats) return null;
+    if (!poke?.stats) return null;
 
     const data = poke.stats.map(stat => ({
-        A: stat.base_stat,
-        subject: stat.stat.name,
+        A: stat?.base_stat,
+        subject: stat?.stat.name,
     }));
 
     return (
@@ -15,12 +15,6 @@ export default function SimpleRadarChart({ poke }){
                 <RadarChart
                     outerRadius="80%"
                     data={data}
-                    margin={{
-                        top: 50,
-                        left: 50,
-                        right: 50,
-                        bottom: 50,
-                    }}
                 >
                     <PolarGrid />
                     <PolarAngleAxis dataKey="subject" />
