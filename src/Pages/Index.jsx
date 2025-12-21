@@ -20,7 +20,7 @@ export default function Index() {
     const [nextLink, setNextLink] = useState('');
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
-    const { clearPokes } = useContext(PokesContext);
+    const { clearPokes, pokesnames } = useContext(PokesContext);
     const { handleGet, handleGetInfosPokes, getPokeByName } = useGetInfos(currentLink, setLoading);
 
     const getInfos = useCallback(async () => {
@@ -55,6 +55,12 @@ export default function Index() {
         }
     }
 
+    function handleCompere(){
+        if(pokesnames.length < 1)
+            return toast.error('Nenhum pokemon selecionado')
+        navigate('/compare')
+    }
+
     useEffect(() => {
         getInfos();
     }, [getInfos]);
@@ -77,7 +83,7 @@ export default function Index() {
                             />
                         </Grid>
                         <Grid>
-                            <ButtonStyles onClick={() => navigate('/compare')}>
+                            <ButtonStyles onClick={handleCompere}>
                                 Comparar
                             </ButtonStyles>
 
