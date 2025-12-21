@@ -6,7 +6,7 @@ import { useGetInfos } from "../CustomHooks/useGet";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { ContainerCenter, Void } from "./styles";
+import { ButtonStyles, ContainerCenter, Void } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { PokesContext } from "../Context/Pokes";
 import { Input, TextField } from "@mui/material";
@@ -77,15 +77,15 @@ export default function Index() {
                             />
                         </Grid>
                         <Grid>
-                            <Button onClick={() => navigate('/compare')}>
+                            <ButtonStyles onClick={() => navigate('/compare')}>
                                 Comparar
-                            </Button>
+                            </ButtonStyles>
 
                         </Grid>
                         <Grid sx={{ flexDirection: 'column' }}>
-                            <Button onClick={clearPokes}>
+                            <ButtonStyles onClick={clearPokes}>
                                 Limpar seleção
-                            </Button>
+                            </ButtonStyles>
                         </Grid>
                         <Grid><Void /></Grid>
                     </Grid>
@@ -95,15 +95,17 @@ export default function Index() {
                         </Grid>
                     </RenderLoading>
                 </Grid>
-                <Grid item sx={{ xs: 12, justifyContent: 'center' }}>
-                    <Grid container >
-                        <Grid item >
-                            <Button onClick={() => setCurrentLink(previousLink)} disabled={loading || !previousLink}>
+                <Grid item sx={{ xs: 12, justifyContent: 'space-around', flex: 1, padding: '1rem 3rem' }}>
+                    <Grid container sx={{ justifyContent: 'space-between' }} >
+                        <Grid item>
+                            <ButtonStyles onClick={() => setCurrentLink(previousLink)} disabled={loading || !previousLink}>
                                 <IoIosArrowBack />
-                            </Button>
+                            </ButtonStyles>
                         </Grid>
                         <Grid item>
-                            <Button disabled={loading || !nextLink} onClick={() => setCurrentLink(nextLink)}><IoIosArrowForward /></Button>
+                            <ButtonStyles disabled={loading || !nextLink} onClick={() => setCurrentLink(nextLink)}>
+                                <IoIosArrowForward />
+                            </ButtonStyles>
                         </Grid>
                     </Grid>
                 </Grid>

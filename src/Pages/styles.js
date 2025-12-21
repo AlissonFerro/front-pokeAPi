@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { Button, colors } from "@mui/material";
 
 export const ContainerCenter = styled(Grid)(({theme})=> ({
   display: 'flex',
@@ -55,12 +56,19 @@ export const Void = styled('div')(({theme}) => ({
   width: '100px'
 }));
 
-export const Input = styled('input')(({theme}) => {
+export const Input = styled('input')(({theme}) => ({
 
-})
-export const Title = styled('h1')(({theme}) => {
+}));
 
-})
-export const Image = styled('img')(({theme}) => {
+export const Title = styled('h1')(({theme}) => ({
 
-})
+}));
+
+export const Image = styled('img')(({theme}) => ({
+
+}));
+
+export const ButtonStyles = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText
+}));
