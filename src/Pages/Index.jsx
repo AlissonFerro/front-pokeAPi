@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import RenderList from "../Components/RenderList";
 import RenderLoading from "../Components/RenderLoading";
-import { useGetInfos } from "../CustomHooks/useGet";
+import { useGetInfos } from "../CustomHooks/useGet.ts";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -46,7 +46,7 @@ export default function Index() {
             return 
         } 
         try {
-            const res = await getPokeByName({ pokename: search });
+            const res = await getPokeByName(search);
             if(res.data.pokes) setPokes(res.data);
         } catch (error) {
             toast.error(error);
