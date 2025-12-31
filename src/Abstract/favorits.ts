@@ -8,7 +8,7 @@ export function getFavorits(): Array<string | null> {
     return favoritsArray;
 }
 
-export function addFavorits(item): void {
+export function addFavorits(item: string): void {
     const favorits = getFavorits();
     if (!favorits.includes(item)) {
         favorits.push(item);
@@ -18,7 +18,7 @@ export function addFavorits(item): void {
     }
 }
 
-export function removeToFavorits(item): void {
+export function removeToFavorits(item: string): void {
     const favorits = getFavorits();
 
     const updatedFavorits = favorits.filter((fav) => fav !== item);
