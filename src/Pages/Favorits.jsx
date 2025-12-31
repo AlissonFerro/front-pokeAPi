@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { ContainerGap } from "./styles";
 import RenderList from "../Components/RenderList";
-import { getFavorits } from "../Abstract/favorits";
 import RenderLoading from "../Components/RenderLoading";
 import usePokes from "../CustomHooks/usePokes";
 import { RowCenter } from "../Components/styles";
+import { getFavorits } from "../Abstract/favorits.ts";
 
 export default function FavoritsPage() {
     const [pokenames, setPokesnames] = useState([]);

@@ -7,6 +7,8 @@ import ComparePage from "./Pages/Compare";
 import { PokesProvider } from "./Context/Pokes";
 import { ToastContainer } from "react-toastify";
 
+/// TODO: pagina not found
+
 function App() {
   return (
     <PokesProvider>
