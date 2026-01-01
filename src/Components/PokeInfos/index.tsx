@@ -1,7 +1,7 @@
-import { CardBody, CardT, CardTitlePokeInfo, Col, PokeCard, Row } from "../styles";
-import SimpleRadarChart from "../SimpleRadarChart";
-import RenderImages from "../RenderImages";
-import RenderAbilities from "../RenderAbilities";
+import { CardBody, CardT, CardTitlePokeInfo, Col, PokeCard, Row } from "../styles.js";
+import SimpleRadarChart from "../SimpleRadarChart/index.jsx";
+import RenderImages from "../RenderImages/index.jsx";
+import RenderAbilities from "../RenderAbilities/index.jsx";
 
 export default function PokeInfos({ poke }) {    
     return (

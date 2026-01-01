@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 
-export default function RenderImages({ images }) {
+export default function RenderImages({ images }): JSX.Element {
     const [index, setIndex] = useState(0);
     const pathImages = ['front_default', 'back_default', 'back_shiny', 'front_shiny'];
 

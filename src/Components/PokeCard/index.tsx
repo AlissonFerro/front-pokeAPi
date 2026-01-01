@@ -1,15 +1,20 @@
-import { CardBody, CardFooter, CardHeader, CardT, PokeImage, Title, Void } from "../styles";
+import { CardBody, CardFooter, CardHeader, CardT, PokeImage, Title, Void } from "../styles.js";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import { addFavorits, getFavorits, removeToFavorits } from "../../Abstract/favorits";
-import { useContext, useEffect, useState } from "react";
+import { addFavorits, getFavorits, removeToFavorits } from "../../Abstract/favorits.js";
+import { useContext, useEffect, useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "@mui/material";
-import { PokesContext } from "../../Context/Pokes";
+import { PokesContext } from "../../Context/Pokes.jsx";
 
-export default function PokeCard({ name, png }) {
+interface PokeCardProps {
+    name: string,
+    png: string
+}
+
+export default function PokeCard({ name, png }: PokeCardProps): JSX.Element {
     const navigate = useNavigate();
     const { pokesnames, addOrRemovePoke } = useContext(PokesContext);
-    const [checked, setChecked] = useState({});
+    const [checked, setChecked] = useState<Object>({});
 
     useEffect(() => {
         getChecked()
@@ -17,7 +22,7 @@ export default function PokeCard({ name, png }) {
 
     if (!name || !png) return
 
-    function RenderTooltips({ name }) {
+    function RenderTooltips({ name }): JSX.Element {
         const [isFavorited, setIsFavorited] = useState(false);
 
         useEffect(() => {
@@ -59,7 +64,7 @@ export default function PokeCard({ name, png }) {
 
 
     return (
-        <CardT item alignItems={'center'} >
+        <CardT alignItems={'center'} >
             <CardHeader>
                 <Checkbox color="secondary" checked={!!checked[name]} value={name} onChange={() => handleChecked({ name })} />
                 <Title onClick={() => handleNavigate(name)}>

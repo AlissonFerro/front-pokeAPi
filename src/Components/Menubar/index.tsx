@@ -15,16 +15,17 @@ import {
 } from "@mui/icons-material";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useContext, useState } from "react";
+import { useContext, useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
-import { DrawerStyles, Void } from "../styles";
-import { ThemeContext } from "../../Context/Theme";
+import { DrawerStyles, Void } from "../styles.js";
+import { ThemeContext } from "../../Context/Theme.jsx";
 
 export default function Menubar() {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState<boolean>(false);
     const [drawerWidth, setDrawerWidth] = useState(50);
     const navigate = useNavigate();
-    const { mode, toggleColorMode } = useContext(ThemeContext)
+    const { mode, toggleColorMode } = useContext(ThemeContext);
+
     const handleClose = () => {
         setShow(false);
         setDrawerWidth(50)
@@ -35,7 +36,7 @@ export default function Menubar() {
         setDrawerWidth(320);
     }
 
-    function RenderMenuIcon({ show }) {
+    function RenderMenuIcon({show}: {show: boolean}): JSX.Element {
         if (show)
             return <ListItem disablePadding>
                 <ListItemButton onClick={handleClose} >
@@ -54,7 +55,7 @@ export default function Menubar() {
         </ListItem>
     }
 
-    function RenderMode({ mode }) {
+    function RenderMode({ mode }: {mode: "light" | "dark"}): JSX.Element {
         return (
             <ListItemButton onClick={toggleColorMode}>
                 <ListItemIcon>

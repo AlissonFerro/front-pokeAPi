@@ -23,7 +23,7 @@ interface NamedAPIResource {
     url: string;
 }
 
-interface Ability {
+export interface Ability {
     ability: NamedAPIResource;
     is_hidden: boolean;
     slot: number;
