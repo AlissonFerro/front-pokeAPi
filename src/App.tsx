@@ -1,13 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Index from "./Pages/Index";
-import FavoritsPage from "./Pages/Favorits";
-import PokePage from "./Pages/Poke";
-import MenuLayout from "./Layout/Menu";
-import ComparePage from "./Pages/Compare";
-import { PokesProvider } from "./Context/Pokes";
+import Index from "./Pages/Index.jsx";
+import FavoritsPage from "./Pages/Favorits.jsx";
+import PokePage from "./Pages/Poke.jsx";
+import MenuLayout from "./Layout/Menu.jsx";
+import ComparePage from "./Pages/Compare.jsx";
+import { PokesProvider } from "./Context/Pokes.jsx";
 import { ToastContainer } from "react-toastify";
-
-/// TODO: pagina not found
+import NotFoundPage from "./Pages/NotFound";
 
 function App() {
   return (
@@ -19,6 +18,7 @@ function App() {
           <Route path="favoritos" element={<FavoritsPage />} />
           <Route path="search/:name" element={<PokePage />} />
           <Route path="compare/" element={<ComparePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </PokesProvider>
