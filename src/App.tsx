@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Index from "./Pages/Index.jsx";
 import FavoritsPage from "./Pages/Favorits.jsx";
 import PokePage from "./Pages/Poke.jsx";
-import MenuLayout from "./Layout/Menu.jsx";
+import MenuLayout from "./Layout/Menu";
 import ComparePage from "./Pages/Compare.jsx";
 import { PokesProvider } from "./Context/Pokes.jsx";
 import { ToastContainer } from "react-toastify";
