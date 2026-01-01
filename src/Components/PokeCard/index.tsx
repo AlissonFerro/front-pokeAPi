@@ -13,12 +13,12 @@ interface PokeCardProps {
 
 export default function PokeCard({ name, png }: PokeCardProps): JSX.Element {
     const navigate = useNavigate();
-    const { pokesnames, addOrRemovePoke } = useContext(PokesContext);
+    const { pokes, addOrRemovePoke } = useContext(PokesContext);
     const [checked, setChecked] = useState<Object>({});
 
     useEffect(() => {
         getChecked()
-    }, [pokesnames]);
+    }, [pokes]);
 
     if (!name || !png) return
 
@@ -51,13 +51,14 @@ export default function PokeCard({ name, png }: PokeCardProps): JSX.Element {
     }
 
     function handleChecked({ name }) {
-        addOrRemovePoke({ name })
+        addOrRemovePoke(name)
     }
 
     function getChecked() {
-        const map = {};
-        pokesnames.forEach((name) => {
-            map[name] = true; 
+        const map: Record<string, boolean> = {};
+        pokes.forEach((poke) => {
+            const key = typeof poke === 'string' ? poke : poke.name;
+            map[key] = true;
         });
         setChecked(map);
     }

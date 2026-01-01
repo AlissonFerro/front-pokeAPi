@@ -18,7 +18,7 @@ export default function FavoritsPage() {
     }, []);
 
     useEffect(() => {
-        getPokesByNames({ pokenames});
+        getPokesByNames(pokenames);
     }, [pokenames])
 
     return (

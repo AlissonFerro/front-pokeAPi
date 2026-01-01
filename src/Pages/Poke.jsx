@@ -8,7 +8,7 @@ import { Container } from "@mui/material";
 export default function PokePage() {
   const [poke, setPoke] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { getPokeInfos } = usePokes({ pokenames: [], setLoading: setIsLoading, setListPokes: () => { } });
+  const { getPokeInfos } = usePokes(setIsLoading, setPoke);
   const { name } = useParams();
 
   const fetchData = useCallback(async () => {

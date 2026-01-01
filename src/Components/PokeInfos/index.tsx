@@ -2,8 +2,9 @@ import { CardBody, CardT, CardTitlePokeInfo, Col, PokeCard, Row } from "../style
 import SimpleRadarChart from "../SimpleRadarChart/index.jsx";
 import RenderImages from "../RenderImages/index.jsx";
 import RenderAbilities from "../RenderAbilities/index.jsx";
+import type { PokemonData } from "../../Interfaces/Poke.js";
 
-export default function PokeInfos({ poke }) {    
+export default function PokeInfos({ poke }: { poke: PokemonData }) {    
     return (
         <PokeCard>
             <CardT>
