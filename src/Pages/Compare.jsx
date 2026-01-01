@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { ContainerCenter } from "./styles";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import usePokes from "../CustomHooks/usePokes";
+import usePokes from "../CustomHooks/usePokes.ts";
 import RenderLoading from "../Components/RenderLoading";
 import RenderList from "../Components/RenderList";
 import { PokesContext } from "../Context/Pokes";
@@ -12,7 +12,7 @@ export default function ComparePage() {
     const [pokes, setPokes] = useState([]);
     const [loading, setLoading] = useState(true);
     const { pokesnames } = useContext(PokesContext);
-    const { getPokeInfos } = usePokes({ pokenames: pokes, setListPokes: setPokes, setLoading: setLoading });
+    const { getPokeInfos } = usePokes(setLoading, setPokes);
 
     async function handleGet() {
         const getPokes = pokesnames.map((pokename) => getPokeInfos(pokename));
@@ -20,7 +20,7 @@ export default function ComparePage() {
         setPokes(promises.map(promise=> promise.data))
     }
 
-    function RenderListPokes({ pokes }){
+    function RenderListPokes({pokes}){
         return pokes.map((poke, i) => {
             return <PokeInfos poke={poke} key={i}/> 
         })

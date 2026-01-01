@@ -1,5 +1,5 @@
 import { Activity, useCallback, useEffect, useState } from "react";
-import usePokes from "../CustomHooks/usePokes"
+import usePokes from "../CustomHooks/usePokes.ts"
 import { useParams } from "react-router-dom";
 import PokeInfos from "../Components/PokeInfos";
 import { ContainerCenter } from './styles';

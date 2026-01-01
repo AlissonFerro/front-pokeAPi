@@ -1,10 +1,14 @@
 import axios from "axios";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import { toast } from "react-toastify";
+import type { PokemonData } from "../Interfaces/Poke.js";
 
-export default function usePokes({ setLoading, setListPokes }) {
+export default function usePokes(
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>, 
+    setListPokes: React.Dispatch<React.SetStateAction<string[]>>
+) {
 
-    const getPokesByNames = useCallback(async ({ pokenames }) => {
+    const getPokesByNames = useCallback(async (pokenames: string[]): Promise<void> => {
         const pokesAwait = [];
         setLoading(true);
         for (let i = 0; i < pokenames.length; i++) {
@@ -21,7 +25,7 @@ export default function usePokes({ setLoading, setListPokes }) {
         }
     }, [])
 
-    async function getPokeInfos(name) {
+    async function getPokeInfos(name: string): Promise<PokemonData> {
         setLoading(true);
         try {
             return await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
